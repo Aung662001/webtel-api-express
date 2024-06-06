@@ -25,7 +25,7 @@ app.get("/floors", (req, res) => {
     connections.query(`select * from fb_table_types `, (err, rows, fields) => {
       if (err) {
         console.log(err.message)
-        return res.status(500).json({ message: "no data found!" });
+        return res.status(500).json({ message: err.message });
       }
       return res.status(200).json(rows);
     });
