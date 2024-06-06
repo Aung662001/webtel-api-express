@@ -24,15 +24,12 @@ app.get("/floors", (req, res) => {
     let connections = dbConnect(dbConfig);
     connections.query(`select * from fb_table_types `, (err, rows, fields) => {
       if (err) {
-        console.log(err.message)
-        return res.status(500).json({ message: err.message });
+        return res.status(500).json({ message:"Failed!"+ err.message });
       }
       return res.status(200).json(rows);
     });
   } catch(err) {
-    console.log("lowest catch blog");
-    console.log(err.message)
-    res.status(500).json({ message: "no data found!!" });
+    res.status(500).json({ message: "no data found!!"+err.message });
   }
 });
 
