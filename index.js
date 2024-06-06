@@ -30,7 +30,8 @@ app.get("/floors", (req, res) => {
       return res.status(200).json(rows);
     });
   } catch {
-    res.status(500).json({ message: "no data found!" });
+    console.log("lowest catch blog");
+    res.status(500).json({ message: "no data found!!" });
   }
 });
 
