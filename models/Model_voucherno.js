@@ -1,5 +1,5 @@
-const { dbConnect, dbConfig } = require("../connections/dbConnection");
-const date = require("date-and-time");
+import { dbConnect, dbConfig } from "../connections/dbConnection.js";
+import date from "date-and-time";
 function getOrderSerialNo() {
     const now = date.format(new Date(), "YYYY/MM/DD");
     const connection = dbConnect(dbConfig);
@@ -36,4 +36,4 @@ function getOrderSerialNo() {
     });
   }
 
-module.exports = { getOrderSerialNo };
+export{ getOrderSerialNo };

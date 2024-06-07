@@ -1,14 +1,11 @@
-const ThermalPrinter = require("node-thermal-printer").printer;
-const PrinterTypes = require("node-thermal-printer").types;
-const date = require("date-and-time");
+import date from "date-and-time";
 const now = new Date();
-const textToImage = require("text-to-image");
-const path = require("path");
-const fs = require("fs");
-const { registerFont, createCanvas, loadImage } = require("canvas");
+import textToImage from "text-to-image";
+import fs from "fs";
+import { registerFont, createCanvas, loadImage } from "canvas";
 // const { table, getBorderCharacters } = require("table");
-const stringWidth = require("string-width");
-var Table = require("cli-table");
+import stringWidth from "string-width";
+import Table from "cli-table";
 
 const imageConverter = async (text, path) => {
   try {
@@ -394,7 +391,7 @@ function deleteFile(filePath) {
     fs.unlinkSync(filePath);
   }
 }
-module.exports = {
+export {
   printOrderFormat,
   printOrderCancelFormat,
   printOrderCancelFormatKitchen,

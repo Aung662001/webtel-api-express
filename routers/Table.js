@@ -1,7 +1,7 @@
-const express = require("express");
-const TableRouter = express.Router();
-const { dbConnect, dbConfig } = require("../connections/dbConnection");
-const { getTableItems } = require("../querys/querys");
+import express from "express";
+export const TableRouter = express.Router();
+import { dbConnect, dbConfig } from "../connections/dbConnection.js";
+import { getTableItems } from "../querys/querys.js";
 TableRouter.get("/:floorId", (req, res) => {
   let connections = dbConnect(dbConfig);
   let floorId = req.params.floorId;
@@ -41,4 +41,4 @@ TableRouter.get("/getTableItems/:table_id", (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 });
-module.exports = { TableRouter };
+// module.exports = { TableRouter };

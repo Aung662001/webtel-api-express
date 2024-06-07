@@ -1,6 +1,6 @@
-const mysql = require("mysql");
-const { Sequelize } = require('sequelize');
-const dbConfig = () => {
+import { createConnection } from "mysql";
+import { Sequelize } from 'sequelize';
+export const dbConfig = () => {
   const host = process.env.DBHOST || "";
   const user = process.env.DBUSER || "";
   const password = process.env.DBPASSWORD || "";
@@ -8,13 +8,13 @@ const dbConfig = () => {
 
   return { host, user, password, database };
 };
-const dbConnect = (dbConfig) => {
+export const dbConnect = (dbConfig) => {
   const config = dbConfig();
   if (dbConnect.connection) {
     return dbConnect.connection;
   } else {
     try {
-      const connection = mysql.createConnection(config);
+      const connection = createConnection(config);
       dbConnect.connection = connection;
       console.log("connected to database");
       return connection;
@@ -47,4 +47,4 @@ const dbClose = (connection) => {
     }
   });
 };
-module.exports = { dbConnect, dbClose, dbConfig };
+// export { dbConnect, dbClose, dbConfig };

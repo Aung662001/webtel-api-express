@@ -1,26 +1,24 @@
-const express = require("express");
-const { dbConnect, dbConfig } = require("../connections/dbConnection");
-const OrderRouter = express.Router();
-const {
+import express from 'express';
+import { dbConnect, dbConfig } from "../connections/dbConnection.js";
+export const OrderRouter = express.Router();
+import {
   updatePrintStatus,
   insertOrderDetails,
   getTableData,
   orderCancel,
-  tableChangeItems,
   getBarPrintData,
   getKitchenPrinterData,
   getKitchenPrintCancelData,
   getBarPrintCancelData,
-} = require("../querys/querys");
-const { ThermalPrinter, PrinterTypes } = require("node-thermal-printer");
-const {
+} from "../querys/querys.js";
+import { ThermalPrinter, PrinterTypes } from "node-thermal-printer";
+import {
   printOrderFormat,
   printOrderFormatKitchen,
   printOrderCancelFormat,
   printOrderCancelFormatKitchen,
-} = require("../printer/prepareItems");
-const { getOrderSerialNo } = require("../models/Model_voucherno");
-const { getBorderCharacters } = require("table");
+} from "../printer/prepareItems.js";
+import { getOrderSerialNo } from "../models/Model_voucherno.js";
 
 OrderRouter.post("/createOrders/:isPrint", (req, res) => {
   const { isPrint } = req.params;
@@ -227,4 +225,4 @@ const setPrinted = (table_id, connection) => {
   connection.query(updateSql);
 };
 
-module.exports = { OrderRouter };
+// module.exports = { OrderRouter };

@@ -1,6 +1,6 @@
-const express = require("express");
-const ProductRouter = express.Router();
-const { dbConnect, dbConfig } = require("../connections/dbConnection");
+import express from 'express';
+export const ProductRouter = express.Router();
+import { dbConnect, dbConfig } from "../connections/dbConnection.js";
 
 ProductRouter.post("/", (req, res) => {
   let connections = dbConnect(dbConfig);
@@ -27,4 +27,4 @@ ProductRouter.post("/", (req, res) => {
   }
 });
 
-module.exports = { ProductRouter };
+

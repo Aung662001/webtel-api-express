@@ -66,7 +66,7 @@ function getKitchenPrintCancelData(table_id,order_id){
   WHERE p.unit_type=1 AND his.table_id = ${table_id} AND ifnull(paid,0)=0 
   AND p.order_printer_id=2 AND his.id=${order_id} ORDER BY his.id `;
 }
-module.exports = {
+export {
   insertOrderDetails,
   updatePrintStatus,
   getTableData,

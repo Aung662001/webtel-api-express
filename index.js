@@ -1,18 +1,20 @@
-const express = require("express");
-require("dotenv").config();
-const { dbConnect, dbConfig } = require("./connections/dbConnection");
-const cors = require("cors");
-const { TableRouter } = require("./routers/Table");
-const { ProductRouter } = require("./routers/Product");
-const { OrderRouter } = require("./routers/Order");
+import express from "express";
+import dotenv from "dotenv";
+dotenv.config();
+import { dbConnect, dbConfig } from "./connections/dbConnection.js";
+import cors from "cors";
+import { TableRouter } from "./routers/Table.js";
+import { ProductRouter } from "./routers/Product.js";
+import { OrderRouter } from "./routers/Order.js";
+import bodyparser from "body-parser";
 
 const app = express();
 const PORT = process.env.PORT || 8877;
 
 app.use(cors());
-const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+const { urlencoded, json } = bodyparser;
+app.use(urlencoded({ extended: false }));
+app.use(json());
 
 
 app.use("/tables", TableRouter);
