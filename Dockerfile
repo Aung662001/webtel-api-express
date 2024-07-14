@@ -1,25 +1,32 @@
-# Use the same base image as your development environment
-FROM node:current
 
-# Create app directory
-WORKDIR /usr/src/app
 
-# Clear npm cache and install node-gyp globally
-RUN npm cache clean --force && \
-    npm install -g node-gyp
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Dockerfile reference guide at
+# https://docs.docker.com/go/dockerfile-reference/
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
+# Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
 
-RUN npm install 
+ARG NODE_VERSION=18.20.3
 
-# Bundle app source
+FROM node:${NODE_VERSION}-slim
+
+# Use production node environment by default.
+# ENV NODE_ENV production
+
+# FROM node:current
+
+# ENV NODE_VERSION=18.20.3
+
+WORKDIR /app
+
+
 COPY . .
+RUN rm -rf node_modules/
+RUN npm install
 
-# Your app binds to port 8080 so you'll use the EXPOSE instruction to have it mapped by the docker daemon
-EXPOSE 8080
+# Expose the port that the application listens on.
+EXPOSE 8800
 
-CMD ["node", "app.js"]
+# Run the application.
+CMD npm start
 

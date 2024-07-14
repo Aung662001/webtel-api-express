@@ -7,19 +7,26 @@ import { TableRouter } from "./routers/Table.js";
 import { ProductRouter } from "./routers/Product.js";
 import { OrderRouter } from "./routers/Order.js";
 import bodyparser from "body-parser";
+import { CompanyRouter } from "./routers/Company.js";
 
-const app = express();
+const app = express(); 
 const PORT = process.env.PORT || 8877;
 
-app.use(cors());
+app.use(cors()); 
+if (process.env.NODE_ENV === 'development') {
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+}
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.errorHandler());
+}
 const { urlencoded, json } = bodyparser;
 app.use(urlencoded({ extended: false }));
 app.use(json());
 
-
 app.use("/tables", TableRouter);
 app.use("/products", ProductRouter);
 app.use("/orders", OrderRouter);
+app.use("/company",CompanyRouter);
 
 app.get("/floors", (req, res) => {
   try {
@@ -34,7 +41,6 @@ app.get("/floors", (req, res) => {
     res.status(500).json({ message: "no data found!!"+err.message });
   }
 });
-
 app.get("/categories", (req, res) => {
   // const { catId } = req.params;
   let connections = dbConnect(dbConfig);
